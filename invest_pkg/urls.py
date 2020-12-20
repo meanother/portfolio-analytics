@@ -1,0 +1,1 @@
+api = 'https://api-invest.tinkoff.ru/openapi'
