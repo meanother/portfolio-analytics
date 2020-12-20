@@ -5,6 +5,7 @@ from base_client import BaseClient
 from utils import set_default_headers
 # T = TypeVar('T')
 
+TOKEN = ''
 
 T = TypeVar('T', bound=BaseModel)  # pragma: no mutate
 
