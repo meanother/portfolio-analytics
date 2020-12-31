@@ -8,13 +8,13 @@ with prepare as
 		, oper.figi
 		, instrument_type
 		, operation_type
-		, payment - commission as payment
+		, payment + commission as payment
 		, price
 		, (case when operation_type = 'Sell' then quantity * -1 else quantity end) as quantity
-		, quantity_executed
+		, (case when operation_type = 'Sell' then quantity_executed * -1 else quantity_executed end) as quantity_executed
 		, status
 		, instr.isin
-		, instr.name
+		, instr.name as name
 		, (case when instr.ticker is null then instrument_type else instr.ticker end) as ticker
 	from
 		operations oper
@@ -32,15 +32,17 @@ data as
 (
 	select
 		ticker
-		, sum(quantity) as cnt
+		, name
+		, sum(quantity_executed) as cnt
 		, sum(payment) as profit
 		, currency
 	from
 		prepare
-	group by 1, 4
+	group by ticker, name, currency
 )
 select
 	ticker
+	, name
 	, profit
 	, currency
 	, case when currency = 'USD' then profit * 73 else profit end as profit_in_rub

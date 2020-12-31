@@ -26,3 +26,18 @@ create table if not exists instruments(
     , type varchar(50) null
     , min_quantity varchar(50) null
 );
+
+create table if not exists portfolio(
+    id integer primary key
+    , name varchar(50) not null
+    , average_position_price varchar(50) null
+    , average_position_price_no_nkd varchar(50) null
+    , balance real not null
+    , blocked varchar(50) null
+    , expected_yield varchar(50) not null
+    , figi varchar(50) not null
+    , instrument_type varchar(50) not null
+    , isin varchar(50) null
+    , lots integer not null
+    , ticker varchar(50) not null
+);

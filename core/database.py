@@ -6,6 +6,7 @@ import sqlite3
 conn = sqlite3.connect(os.path.join("../storage", "portfolio.db"))
 cursor = conn.cursor()
 
+
 def _init_db():
     """Инициализирует БД"""
     with open("../sql/create_tables.sql", "r") as f:
@@ -19,7 +20,7 @@ def check_create_tables():
     cursor.execute("SELECT count(*) FROM sqlite_master "
                    "WHERE type='table'")
     table_exists = cursor.fetchall()[0][0]
-    if int(table_exists) == 2:
+    if int(table_exists) == 3:
         return
     _init_db()
 
